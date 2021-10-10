@@ -1,0 +1,13 @@
+<button
+ 
+  class="wrapper"
+  appTooltip
+  [ngxTooltip]="icon"
+  #tooltipRef="appTooltip"
+  #elementRef
+  mat-fab 
+  [color]="color"
+  [disabled]="disabled"
+  >
+  <mat-icon>{{ icon }}</mat-icon>
+</button>
