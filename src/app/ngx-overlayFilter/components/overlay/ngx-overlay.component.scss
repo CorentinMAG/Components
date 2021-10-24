@@ -1,0 +1,33 @@
+mat-card {
+  max-width: 250px;
+  mat-card-content {
+
+    mat-form-field {
+      max-width: 201px;
+    }   
+     mat-checkbox {
+      margin-right: 10px;
+    }
+    .mat-checkbox .mat-checkbox-frame {
+      transform: scale(1.2);
+    }
+    .mat-checkbox-background {
+      transform: scale(1.2);
+    }
+
+    section {
+      max-height: 200px;
+      overflow: auto;
+
+      ul {
+        list-style-type: none;
+        margin-top: 4px;
+        padding: 10px;
+    
+        li {
+          
+        }
+      }
+    }
+  }
+}

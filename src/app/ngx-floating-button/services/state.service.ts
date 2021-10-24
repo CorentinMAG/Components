@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { State } from '../models/model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class StateService {
 
   private _state: State;

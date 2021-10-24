@@ -1,19 +1,19 @@
-<div [fxLayout]="display">
-    <button 
-    (click)="!stateService.currentState.isHoverable && toggle()"
+<div 
+[fxLayout]="mainDisplay" 
+(mouseenter)="stateService.currentState.isHoverable && toggle()"
+(mouseleave)="stateService.currentState.isHoverable && toggle()"
+[fxLayoutGap]="spaceGap+'px'">
+    <button
+    (click)="!stateService.currentState.isHoverable && toggle()" 
     [@openClose]="(stateService.state$ | async)!.isOpen ? 'open' : 'closed'"
-    (mouseenter)="stateService.currentState.isHoverable && toggle()"
-    (mouseleave)="stateService.currentState.isHoverable && toggle()"
     mat-fab
-    fxFlexOffset="15px"
     class="main_floating_button"
     [color]="color" [disabled]="disabled">
         <mat-icon>{{ icon }}</mat-icon>
     </button>
     <div [fxLayout]="display"
         [@accordion]="(stateService.state$ | async)!.isOpen ? 'open' : 'closed'"
-        [fxLayoutGap]="spaceBetween+'px'" 
-        [fxFlexOffset]="spaceGap+'px'">
+        [fxLayoutGap]="spaceBetween+'px'">
         <ng-content></ng-content>
     </div>
 </div>

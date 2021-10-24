@@ -10,6 +10,7 @@ import { TooltipDirective } from './directives/tooltip.directive';
 import { TooltipComponent } from './components/tooltip/tooltip.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StateService } from './services/state.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   exports: [
     NgxFloatingButtonComponent,
     NgxFloatingButtonItemComponent
+  ],
+  providers: [
+    StateService 
   ]
 })
 export class NgxFloatingButtonModule { }

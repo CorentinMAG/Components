@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxFloatingButtonModule } from './ngx-floating-button/ngx-floating-button.module';
+import { NgxOverlayFilterModule } from './ngx-overlayFilter/ngx-overlayfilter.module';
 
 @NgModule({
   declarations: [
@@ -11,8 +10,8 @@ import { NgxFloatingButtonModule } from './ngx-floating-button/ngx-floating-butt
   ],
   imports: [
     BrowserModule,
-    NoopAnimationsModule,
-    NgxFloatingButtonModule
+    NgxFloatingButtonModule,
+    NgxOverlayFilterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

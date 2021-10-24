@@ -19,19 +19,15 @@ import { NgxFloatingButtonItemComponent } from '../items/ngx-floating-button-ite
         visibility: 'hidden'
       })),
       transition('open => closed',
-        group([
-          query('ngx-floating-button-item', [
-            style({transform: 'scale(1)'}), 
-            stagger(100, [animate('0.05s', style({transform:'scale(0)'}))])]), 
-        ]),
+        query('ngx-floating-button-item', [
+          style({transform: 'scale(1)'}), 
+          stagger(100, [animate('0.05s', style({transform:'scale(0)'}))])]), 
       ),
       transition('closed => open', [style({visibility: 'visible'}),
-        group([
-          query('ngx-floating-button-item', [ 
-            style({transform: 'scale(0)'}),
-            stagger(100, [animate('0.05s', style({transform:'scale(1)'}))])]), 
-        
-    ])])
+        query('ngx-floating-button-item', [ 
+          style({transform: 'scale(0)'}),
+          stagger(100, [animate('0.05s', style({transform:'scale(1)'}))])]), 
+    ])
   ]),
   trigger('openClose', [
     state('open', style({
@@ -60,7 +56,8 @@ export class NgxFloatingButtonComponent implements OnInit, AfterViewInit, AfterC
   @Input() tooltipDisabled: boolean = false;
 
   public display: DISPLAY = 'column-reverse';
-  private _initState: State;
+  public mainDisplay: DISPLAY = 'column-reverse';
+  private _initState: State = {} as State;
   private _stateSubscription!: Subscription;
 
   @ContentChildren(NgxFloatingButtonItemComponent) buttons!: QueryList<NgxFloatingButtonItemComponent>;
@@ -68,14 +65,7 @@ export class NgxFloatingButtonComponent implements OnInit, AfterViewInit, AfterC
   constructor(
     private viewContainer: ViewContainerRef,
     public stateService: StateService
-  ) {
-    this._initState = {
-      isHoverable: this.hoverable,
-      isOpen: this.isOpen,
-      direction: this.direction,
-      position: this.position
-    }
-  }
+  ) {}
 
   ngOnInit(): void {
     this._initState = {
@@ -89,8 +79,8 @@ export class NgxFloatingButtonComponent implements OnInit, AfterViewInit, AfterC
 
   toggle(): void {
     const state = this.stateService.currentState;
-    state.isOpen = !state.isOpen;
-    this.stateService.publish(state);
+    const newState = {...state, isOpen: !state.isOpen};
+    this.stateService.publish(newState);
   }
 
   ngOnDestroy(): void {
@@ -99,6 +89,7 @@ export class NgxFloatingButtonComponent implements OnInit, AfterViewInit, AfterC
 
   ngAfterViewInit(): void {
     this._setPosition();
+    this._setDirection(this.direction);
 
     this._stateSubscription = this.stateService.state$.subscribe(
       (newState: State) => {
@@ -121,6 +112,28 @@ export class NgxFloatingButtonComponent implements OnInit, AfterViewInit, AfterC
     }
   }
 
+  private _setDirection(direction: DIRECTION ): void {
+
+    switch (this.direction) {
+      case 'bottom':
+        this.mainDisplay = 'column';
+        this.display = 'column';
+        break;
+      case 'top':
+        this.mainDisplay = 'column-reverse';
+        this.display = 'column-reverse';
+        break;
+      case 'left':
+        this.mainDisplay = 'row-reverse';
+        this.display = 'row-reverse';
+        break;
+      case 'right':
+        this.mainDisplay = 'row';
+        this.display = 'row';
+        break;
+    }
+  }
+
   private _setPosition(): void {
     const container = this.viewContainer.element.nativeElement;
 
@@ -128,25 +141,21 @@ export class NgxFloatingButtonComponent implements OnInit, AfterViewInit, AfterC
       case 'br':
         container.style.bottom = '50px';
         container.style.right = '50px';
-        this.display = 'column-reverse'
         break;
 
       case 'bl':
         container.style.bottom = '50px';
         container.style.left = '50px';
-        this.display = 'column-reverse';
         break;
 
       case 'tl':
         container.style.top = '50px';
         container.style.left = '50px';
-        this.display = 'column';
         break;
 
       case 'tr':
         container.style.top = '50px';
         container.style.right = '50px';
-        this.display = 'column';
         break;
 
       default:
