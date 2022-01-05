@@ -14,7 +14,7 @@ export interface Task {
   selector: 'ngx-overlay',
   templateUrl: './ngx-overlay.component.html',
   styleUrls: ['./ngx-overlay.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgxOverlayComponent implements OnInit {
 
@@ -34,6 +34,7 @@ export class NgxOverlayComponent implements OnInit {
 
   ngOnInit(): void {
     this._data = this.data.map(d => {return {value: d, checked: true}})
+
     this.renderedData = this._data;
   }
 
@@ -59,12 +60,17 @@ export class NgxOverlayComponent implements OnInit {
     this.allComplete = checked;
 
     this.renderedData.forEach(d => d.checked = checked);
-    
+    if (checked) {
+      this.dataService.updateFilter(this.key, 'ALL', checked);
+    } else {
+      const values = this.renderedData.map(d => d.value);
+      this.dataService.updateFilter(this.key, values, checked);
+    }
   }
 
   checkListChange(e: any): void {
     const label = e.source.value;
     const isChecked = e.checked;
-    this.dataService.filter(this.key, label, isChecked);
+    this.dataService.updateFilter(this.key, label, isChecked);
   }
 }

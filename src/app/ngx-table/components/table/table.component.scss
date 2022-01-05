@@ -1,0 +1,21 @@
+table {
+    width: 50%;
+
+    th {
+        &:hover {
+            background-color: rgba(0,0,0,0.1);
+        }
+
+        ::ng-deep .mat-sort-header-arrow {
+            margin-right: 10px;
+        }
+    }
+
+    tr.mat-row {
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba(0,0,0,0.1);
+        }
+    }
+}

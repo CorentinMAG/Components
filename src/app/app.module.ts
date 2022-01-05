@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NgxFloatingButtonModule } from './ngx-floating-button/ngx-floating-button.module';
-import { NgxOverlayFilterModule } from './ngx-overlayFilter/ngx-overlayfilter.module';
+import { NgxTableModule } from './ngx-table/ngx-table.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +11,7 @@ import { NgxOverlayFilterModule } from './ngx-overlayFilter/ngx-overlayfilter.mo
   imports: [
     BrowserModule,
     NgxFloatingButtonModule,
-    NgxOverlayFilterModule,
+    NgxTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

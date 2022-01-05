@@ -38,10 +38,7 @@ export class NgxFloatingButtonItemComponent implements OnInit {
   onClick(): void {
     const currentState: State = this.stateService.currentState;
 
-    if (!currentState.isHoverable) {
-      const newState = {...currentState, isOpen: !currentState.isOpen};
-      this.stateService.publish(newState);
-    }
+    const newState = {...currentState, isOpen: !currentState.isOpen};
+    this.stateService.publish(newState);
   }
-
 }

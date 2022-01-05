@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewContainerRef, AfterViewInit, ContentChildren, QueryList, AfterContentInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { style, state, transition, animate, trigger, stagger, query, group, keyframes } from '@angular/animations';
+import { style, state, transition, animate, trigger, stagger, query } from '@angular/animations';
 import { Subscription } from 'rxjs';
 import { DIRECTION, DISPLAY, POSITION, State } from '../../models/model';
 import { StateService } from '../../services/state.service';
@@ -162,5 +162,4 @@ export class NgxFloatingButtonComponent implements OnInit, AfterViewInit, AfterC
         throw new Error("position: 'br' | 'bl' | 'tl' | 'tr'");
     }
   }
-
 }

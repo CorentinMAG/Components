@@ -1,6 +1,6 @@
 import { ConnectedPosition, Overlay, OverlayPositionBuilder, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ComponentRef, Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
+import { ComponentRef, Directive, ElementRef, Input, OnInit } from '@angular/core';
 import { TooltipComponent } from '../components/tooltip/tooltip.component';
 import { StateService } from '../services/state.service';
 
@@ -28,10 +28,10 @@ export class TooltipDirective implements OnInit {
 
     if (direction === 'top' || direction === 'bottom') {
       positions = {
-        offsetX: -65,
+        offsetX: -45,
         originX: 'start',
         originY: 'center',
-        overlayX: 'center',
+        overlayX: 'end',
         overlayY: 'center'
       };
     } else if (direction === 'left' || direction === 'right') {
@@ -43,7 +43,7 @@ export class TooltipDirective implements OnInit {
           overlayY: 'center'
         };
     }
-
+    console.log(this.elementRef)
     const positionStrategy = this.overlayPositionBuilder
     .flexibleConnectedTo(this.elementRef)
     .withPositions([positions]);

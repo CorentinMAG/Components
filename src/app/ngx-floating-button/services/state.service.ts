@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, timer } from 'rxjs';
 import { State } from '../models/model';
+import { debounceTime, finalize, tap } from 'rxjs/operators';
 
 @Injectable()
 export class StateService {
@@ -12,7 +13,7 @@ export class StateService {
   constructor() {
     this._state = {} as State;
     this._stateSubject$ = new BehaviorSubject(this._state);
-    this.state$ = this._stateSubject$.asObservable();
+    this.state$ = this._stateSubject$.asObservable().pipe(tap(() =>console.log(this.currentState)));
   }
 
   get currentState(): State {
