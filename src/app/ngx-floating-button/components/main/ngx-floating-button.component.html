@@ -1,7 +1,7 @@
 <div 
 [fxLayout]="mainDisplay" 
-(mouseenter)="stateService.currentState.isHoverable && toggle()"
-(mouseleave)="stateService.currentState.isOpen && stateService.currentState.isHoverable && toggle()"
+(mouseenter)=" !disabled && stateService.currentState.isHoverable && toggle()"
+(mouseleave)="!disabled && stateService.currentState.isOpen && stateService.currentState.isHoverable && toggle()"
 [fxLayoutGap]="spaceGap+'px'">
     <button
     (click)="!stateService.currentState.isHoverable && toggle()" 

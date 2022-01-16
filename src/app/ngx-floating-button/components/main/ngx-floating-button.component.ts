@@ -89,11 +89,14 @@ export class NgxFloatingButtonComponent implements OnInit, AfterViewInit, AfterC
 
   ngAfterViewInit(): void {
     this._setPosition();
-    this._setDirection(this.direction);
+    this._setDirection();
 
     this._stateSubscription = this.stateService.state$.subscribe(
       (newState: State) => {
-        this._showTooltip(newState);
+
+        if (!this.tooltipDisabled) {
+          this._showTooltip(newState);
+        }
       }
     );
   }
@@ -106,13 +109,13 @@ export class NgxFloatingButtonComponent implements OnInit, AfterViewInit, AfterC
     const buttons = this.buttons.toArray();
 
     if (isOpen) {
-      buttons.forEach(b => b.tooltipRef.show());
+      buttons.forEach(b => !b.tooltipDisabled && b.tooltipRef.show());
     } else {
       buttons.forEach(b => b.tooltipRef.hide());
     }
   }
 
-  private _setDirection(direction: DIRECTION ): void {
+  private _setDirection(): void {
 
     switch (this.direction) {
       case 'bottom':

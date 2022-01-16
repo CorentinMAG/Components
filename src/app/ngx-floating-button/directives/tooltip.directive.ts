@@ -43,7 +43,7 @@ export class TooltipDirective implements OnInit {
           overlayY: 'center'
         };
     }
-    console.log(this.elementRef)
+    
     const positionStrategy = this.overlayPositionBuilder
     .flexibleConnectedTo(this.elementRef)
     .withPositions([positions]);

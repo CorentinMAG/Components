@@ -13,7 +13,7 @@ export class StateService {
   constructor() {
     this._state = {} as State;
     this._stateSubject$ = new BehaviorSubject(this._state);
-    this.state$ = this._stateSubject$.asObservable().pipe(tap(() =>console.log(this.currentState)));
+    this.state$ = this._stateSubject$.asObservable();
   }
 
   get currentState(): State {

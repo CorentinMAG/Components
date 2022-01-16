@@ -1,7 +1,7 @@
 <button
   class="child_floating_button"
   appTooltip
-  [ngxTooltip]="tooltip"
+  [ngxTooltip]="tooltip ? tooltip : icon"
   #tooltipRef="appTooltip"
   #elementRef
   mat-fab 

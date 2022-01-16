@@ -12,33 +12,29 @@ import { StateService } from '../../services/state.service';
 export class NgxFloatingButtonItemComponent implements OnInit {
 
   @Input() icon: string = 'home';
-  @Input() tooltip: string = this.icon;
-  @Input() color: string;
-  @Input() disabled: boolean;
-  @Input() tooltipDisabled: boolean;
+  @Input() tooltip?: string;
+  @Input() color: string = 'primary';
+  @Input() disabled: boolean = false;
+  @Input() tooltipDisabled: boolean = false;
 
   @ViewChild('elementRef', {read: ElementRef}) elementRef!: ElementRef<HTMLButtonElement>;
   @ViewChild('tooltipRef') tooltipRef!: TooltipDirective;
 
   constructor(
     public stateService: StateService
-  ) {
-    this.icon = 'home';
-    this.tooltip = this.icon;
-    this.color = 'primary';
-    this.disabled = false;
-    this.tooltipDisabled = false;
-
-  }
+  ) {}
 
   ngOnInit(): void {
   }
 
   @HostListener('click')
   onClick(): void {
-    const currentState: State = this.stateService.currentState;
 
-    const newState = {...currentState, isOpen: !currentState.isOpen};
-    this.stateService.publish(newState);
+    if (!this.disabled) {
+      const currentState: State = this.stateService.currentState;
+
+      const newState = {...currentState, isOpen: !currentState.isOpen};
+      this.stateService.publish(newState);
+    }
   }
 }
